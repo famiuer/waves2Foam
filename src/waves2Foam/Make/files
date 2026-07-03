@@ -17,6 +17,7 @@ $(waveTheories)/$(waveTheory)/newWaveTheory.C
 /* Current type */
 current=current
 $(waveTheories)/$(current)/potentialCurrent/potentialCurrent.C
+$(waveTheories)/$(current)/powerLawCurrent/powerLawCurrent.C
 
 /* Solitary type */
 solitary=solitary

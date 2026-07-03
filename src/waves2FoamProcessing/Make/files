@@ -5,6 +5,7 @@ $(waveProp)/setWaveProperties.C
 /* Current type */
 current=current
 $(waveProp)/$(current)/potentialCurrentProperties/potentialCurrentProperties.C
+$(waveProp)/$(current)/powerLawCurrentProperties/powerLawCurrentProperties.C
 
 /* Solitary type */
 solitary=solitary
