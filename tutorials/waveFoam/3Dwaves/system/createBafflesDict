@@ -1,0 +1,46 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2306                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      createBafflesDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// v2306 replacement for legacy "createBaffles f0 internalWall -overwrite":
+// both sides of the baffle go into the single wall patch "internalWall",
+// matching the BC entries already present in 0.org.
+
+internalFacesOnly true;
+
+baffles
+{
+    internalWall
+    {
+        type        faceZone;
+        zoneName    f0;
+
+        patches
+        {
+            master
+            {
+                name            internalWall;
+                type            wall;
+            }
+            slave
+            {
+                name            internalWall;
+                type            wall;
+            }
+        }
+    }
+}
+
+// ************************************************************************* //

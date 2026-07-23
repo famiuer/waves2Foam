@@ -1,0 +1,38 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2306                                  |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// v2306 replacement for the legacy faceSet utility + system/faceSetDict.
+// Same two boxes as faceSetDict: an L-shaped internal wall.
+
+actions
+(
+    {
+        name    f0;
+        type    faceSet;
+        action  new;
+        source  boxToFace;
+        box     (74.9 -6 59.9) (75.1 3 90.1);
+    }
+    {
+        name    f0;
+        type    faceSet;
+        action  add;
+        source  boxToFace;
+        box     (74.9 -6 59.9) (100.1 3 60.1);
+    }
+);
+
+// ************************************************************************* //

@@ -22,10 +22,11 @@ application="waveFoam"
 # Create mesh
 runApplication blockMesh
 
-# Create internal wall
-runApplication faceSet
+# Create internal wall (v2306: faceSet utility replaced by topoSet;
+# createBaffles now dictionary-driven via system/createBafflesDict)
+runApplication topoSet
 runApplication setsToZones -noFlipMap
-runApplication createBaffles f0 internalWall -overwrite
+runApplication createBaffles -overwrite
 
 # Set wave parameters
 runApplication setWaveParameters
@@ -33,7 +34,9 @@ runApplication setWaveParameters
 # Set wave field
 runApplication setWaveField
 
-# Run application
-runApplication $application
+# Run application in parallel (system/decomposeParDict: 8 ranks, scotch)
+runApplication decomposePar
+runParallel $application
+runApplication reconstructPar
 
 
