@@ -31,6 +31,8 @@ regular=regular
 $(waveTheories)/$(regular)/stokesFirst/stokesFirst.C
 $(waveTheories)/$(regular)/stokesFirstStanding/stokesFirstStanding.C
 $(waveTheories)/$(regular)/stokesSecond/stokesSecond.C
+$(waveTheories)/$(regular)/stokesSecondwCurrent/stokesSecondwCurrent.C
+$(waveTheories)/$(regular)/stokesSecondwShearCurrent/stokesSecondwShearCurrent.C
 $(waveTheories)/$(regular)/stokesSecondModulation/stokesSecondModulation.C
 $(waveTheories)/$(regular)/stokesFifth/stokesFifth.C
 

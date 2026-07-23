@@ -17,6 +17,8 @@ regular=regular
 $(waveProp)/$(regular)/stokesFirstProperties/stokesFirstProperties.C
 $(waveProp)/$(regular)/stokesFirstStandingProperties/stokesFirstStandingProperties.C
 $(waveProp)/$(regular)/stokesSecondProperties/stokesSecondProperties.C
+$(waveProp)/$(regular)/stokesSecondwCurrentProperties/stokesSecondwCurrentProperties.C
+$(waveProp)/$(regular)/stokesSecondwShearCurrentProperties/stokesSecondwShearCurrentProperties.C
 $(waveProp)/$(regular)/stokesSecondModulationProperties/stokesSecondModulationProperties.C
 $(waveProp)/$(regular)/stokesFifthProperties/stokesFifthProperties.C
 
