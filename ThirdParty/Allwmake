@@ -91,8 +91,10 @@ echo "====================================="
 echo "    COMPILE OCEANWAVE3D"
 echo "====================================="
 
-# Path for the git-repository
+# Path for the git-repository, and the pinned commit: builds must not
+# depend on whatever upstream master is on the day
 ocw="OceanWave3D-Fortran90"
+ocwCommit="bb7d99eaba58f90227126d8f4f705ca8218bbfbb"
 
 # Create output directory for OceanWave3D
 if [ ! -d "bin" ]
@@ -100,43 +102,25 @@ then
     mkdir bin
 fi
 
-# Check-out the git-repository
+# Check-out the git-repository at the pinned commit
 if [ ! -d "$ocw" ]
 then
     echo ""
     echo "Cloning the OceanWave3D git repository ..."
-    git clone https://github.com/boTerpPaulsen/OceanWave3D-Fortran90.git  
-
-    # Copy the compilation settings for OCW3D
-    cp $settings/oceanWave3DSettings/common.mk $ocw/.
-    cp $settings/oceanWave3DSettings/makefile $ocw/.
-else
-    echo ""
-    echo "Pull changes from the OceanWave3D git repository ..."
-    cd $ocw
-    
-    # Stash the local changes on the settings
-    git stash
-
-    # Get an update of the git and report the result
-    output=`git pull`
-    echo $output
-    # Check whether the git was already up to date
-    if [[ $output == "Already up-to-date." ]]
-    then
-        compileFlag=0
-    elif [[ $output == "Already up to date." ]] 
-    then
-        compileFlag=0
-    else
-        compileFlag=1
-    fi
-
-    # Re-apply the compilation settings
-    git stash pop
-
-    cd $OLDPWD
+    git clone https://github.com/boTerpPaulsen/OceanWave3D-Fortran90.git
 fi
+
+if [ "`git -C $ocw rev-parse HEAD`" != "$ocwCommit" ]
+then
+    echo "Checking out OceanWave3D $ocwCommit"
+    git -C $ocw fetch -q origin
+    git -C $ocw checkout -q -f $ocwCommit || exit 1
+    compileFlag=1
+fi
+
+# (Re-)apply the compilation settings for OCW3D
+cp $settings/oceanWave3DSettings/common.mk $ocw/.
+cp $settings/oceanWave3DSettings/makefile $ocw/.
 
 # Check for the correct environmental variables
 if [ -z "$WAVES_LIBBIN" ]
